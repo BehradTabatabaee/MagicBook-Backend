@@ -1,5 +1,8 @@
 # Mangareader backend
-##### i seriously don't know why i'm doing this, guess i'm just under too much pressure to think logically
-##### planning on finishing this tonight (have to pull an all-nighter, FML. why the fuck am i doing this?), gotta see how that goes
-##### hope this allows me to vent some of my frustration (sorry to my teammates)
-##### based off the diagrams we made for our software engineering project (erd, UML use-case diagram, data-flow diagram)
+##### backend for a mangareader android application. based off the design we made for 
+##### our own software engineering class's book store project, this repository can be used as a
+##### guide for our future work, since a manga (stored in pdf) is very similar in nature to a book.
+##### extremely annoyed since we had a bad time participating in a coding contest, so i'll be pulling
+##### an all-nighter to see if i can finish this up by tomorrow morning.
+#### EDIT: managed to finish it in a night, which helped release some of my frustration. sorry to my teammates
+#### for ruining the contest 
