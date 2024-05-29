@@ -1,13 +1,12 @@
 <?php
     header('Content-type: application/json');
-    require_once __DIR__ . '/../../vendor/autoload.php';
+    require_once __DIR__ . '/../vendor/autoload.php';
 
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
     $dotenv->load();
 
     // connect to database
     $conn = new mysqli($_ENV['DB_SERVER'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_NAME'], $_ENV['DB_PORT']);
-
 
     // exit if connection fails
     if ($conn->connect_error) {
@@ -16,13 +15,11 @@
         exit();
     }
 
-    // clear the database
-    $result = $conn->query("SHOW TABLES");
-    while ($row = $result->fetch_array()) {
-        $table = $row[0];
-        // delete each table
-        $conn->query("DROP TABLE IF EXISTS $table");
-    }
+    // // clear the database
+    // $tables = array('Admins', 'Users');
+    // foreach($tables as $table) {
+    //     $conn->query("DROP TABLE IF EXISTS $table");
+    // }
 
     // function to query the database, just to make the code a bit cleaner
     function createQuery($sqlQuery) {
@@ -52,32 +49,10 @@
         adminName VARCHAR(50) PRIMARY KEY,
         adminPassword VARCHAR(255) NOT NULL
         )");
-    
-    createQuery("CREATE TABLE Mangas (
-        mangaID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        mangaName VARCHAR(50) NOT NULL,
-        mangaPicture VARCHAR(2083),
-        mangaVolumes INT UNSIGNED NOT NULL
-        )");
-    
-    createQuery("CREATE TABLE Volumes (
-        volumeID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        mangaID INT UNSIGNED,
-        mangaName VARCHAR(50) NOT NULL,
-        volumeNumber INT NOT NULL,
-        volumeURL VARCHAR(2083) NOT NULL,
-        FOREIGN KEY (mangaID) REFERENCES Mangas(mangaID)
-        )");
 
-    createQuery("INSERT INTO Admins (adminName, adminPassword) VALUES ('Behrad', '".password_hash('Tabatabaee', PASSWORD_DEFAULT)."')");
+    createQuery("INSERT INTO Admins (adminName, adminPassword) VALUES ('magicbooks', '".password_hash('magicbooks', PASSWORD_DEFAULT)."')");
 
-    createQuery("INSERT INTO Users (userName, firstName, lastName, userPassword) VALUES ('Behrad', 'Behrad', 'Tabatabaee', '".password_hash('Behrad', PASSWORD_DEFAULT)."')");
-    
-    createQuery("INSERT INTO Mangas (mangaName, mangaVolumes) VALUES ('Vagabond', 1)");
-
-    createQuery("INSERT INTO Volumes (mangaName, mangaID, volumeNumber, volumeURL) 
-    SELECT 'Vagabond', mangaID, 1, 'https://mangareader.storage.iran.liara.space/vol1.pdf' 
-    FROM Mangas WHERE mangaName = 'Vagabond'");
+    createQuery("INSERT INTO Users (userName, firstName, lastName, userPassword) VALUES ('magicBooks', 'magic', 'Books', '".password_hash('magicBooks', PASSWORD_DEFAULT)."')");
 
     echo json_encode("Tables created and data added successfully");
 ?>
