@@ -47,10 +47,12 @@ if ($result->num_rows !== 0) {
     exit();
 }
 
-$query = "INSERT INTO USERS (userName, firstName, lastName, userPassword, email)
+$hashedPassword = password_hash($data['userPassword'], PASSWORD_DEFAULT);
+
+$query = "INSERT INTO Users (userName, firstName, lastName, userPassword, email)
 VALUES (?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($query);
-$stmt->bind_param('sssss', $data['userName'], $data['firstName'], $data['lastName'], $data['userPassword'], $data['email']);
+$stmt->bind_param('sssss', $data['userName'], $data['firstName'], $data['lastName'], $hashedPassword, $data['email']);
 $stmt->execute();
 
 if ($stmt->affected_rows === 0) {
@@ -59,6 +61,6 @@ if ($stmt->affected_rows === 0) {
     exit();
 }
 
-echo json_encode("Registration Complete!");
+echo json_encode(array("message" => "Registration Complete!"));
 
 ?>
