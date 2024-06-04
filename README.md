@@ -1,4 +1,2 @@
-# Mangareader backend
-##### backend for a mangareader android application. based off the design we made for 
-##### our own software engineering class's book store project, this repository can be used as a
-##### guide for our future work, since a manga (stored in pdf) is very similar in nature to a book.
+# MagicBook Backend
+##### backend for an android book store application named MagicBook, which is the group project we're working on for our software engineering course. overall, it has been a fun and rewarding experience so far (i hope i'm not the only one who thinks like this :D)
